@@ -1,7 +1,75 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.SignalR.Client
+@using Shared
+@inject HttpClient Http
 
-<PageTitle>Home</PageTitle>
+<PageTitle>System Zasobów</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Zarządzanie Zasobami</h1>
 
-Welcome to your new app.
+<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+    <h3>Dodaj zasób</h3>
+    <input @bind="newResource.Name" placeholder="Nazwa sprzętu" />
+    <select @bind="newResource.Status">
+        <option>Dostępny</option>
+        <option>W naprawie</option>
+        <option>Zajęty</option>
+    </select>
+    <button @onclick="AddResource">Dodaj</button>
+</div>
+
+@if (resources == null)
+{
+    <p>Ładowanie...</p>
+}
+else
+{
+    <table class="table">
+        <thead><tr><th>ID</th><th>Nazwa</th><th>Status</th></tr></thead>
+        <tbody>
+            @foreach (var r in resources)
+            {
+                <tr style="@(r.Status == "W naprawie" ? "color:red" : "color:green")">
+                    <td>@r.Id</td>
+                    <td>@r.Name</td>
+                    <td>@r.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Resource>? resources;
+    private Resource newResource = new Resource();
+    private HubConnection? hubConnection;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+
+        // SIGNALR - ODBIERANIE POWIADOMIEŃ (Wymóg 5)
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl("http://localhost:5000/resourcehub") // Port serwera! Zmienimy go zaraz
+            .Build();
+
+        hubConnection.On("ReceiveUpdate", async () =>
+        {
+            await LoadData();
+            StateHasChanged();
+        });
+
+        await hubConnection.StartAsync();
+    }
+
+    private async Task LoadData()
+    {
+        resources = await Http.GetFromJsonAsync<List<Resource>>("http://localhost:5000/Resources");
+    }
+
+    private async Task AddResource()
+    {
+        await Http.PostAsJsonAsync("http://localhost:5000/Resources", newResource);
+        newResource = new Resource(); // Reset
+    }
+}
