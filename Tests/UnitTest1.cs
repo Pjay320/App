@@ -1,10 +1,11 @@
-﻿namespace Tests;
-
-public class UnitTest1
+﻿using Xunit;
+using Shared;
+public class ResourceTests
 {
     [Fact]
-    public void Test1()
+    public void CreateResource_ShouldSetStatus()
     {
-
+        var res = new Resource { Name = "Test" };
+        Assert.Equal("Dostępny", res.Status); 
     }
 }
