@@ -3,21 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{D4C36916-29E3-4C96-855D-290EB356FCB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{D4C36916-29E3-4C96-855D-290EB356FCB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{8E2DC146-140F-4FED-B340-46C11403FCDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{8E2DC146-140F-4FED-B340-46C11403FCDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{A26FA28F-8387-4899-996B-46E1AE55277F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{A26FA28F-8387-4899-996B-46E1AE55277F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{8F11CC23-9079-4515-820D-4519FC1AF0B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{8F11CC23-9079-4515-820D-4519FC1AF0B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dokumentacja", "Dokumentacja", "{6C6EBCB3-6B79-4373-9024-4FC9726EF935}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D4C36916-29E3-4C96-855D-290EB356FCB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -36,5 +38,8 @@ Global
 		{8F11CC23-9079-4515-820D-4519FC1AF0B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F11CC23-9079-4515-820D-4519FC1AF0B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F11CC23-9079-4515-820D-4519FC1AF0B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

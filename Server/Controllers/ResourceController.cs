@@ -8,7 +8,7 @@ namespace Server.Controllers;
 [Route("[controller]")]
 public class ResourcesController : ControllerBase
 {
-    // Udawana baza danych (Singleton)
+ 
     private static List<Resource> _db = new List<Resource>
     {
         new Resource { Id = 1, Name = "Laptop Dell", Status = "Dostępny" },
@@ -30,7 +30,7 @@ public class ResourcesController : ControllerBase
     {
         resource.Id = _db.Any() ? _db.Max(x => x.Id) + 1 : 1;
         _db.Add(resource);
-        // Powiadom wszystkich klientów przez SignalR (Wymóg 5)
+       
         await _hub.Clients.All.SendAsync("ReceiveUpdate");
     }
 }
