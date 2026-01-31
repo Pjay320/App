@@ -8,7 +8,7 @@ namespace Server.Controllers;
 [Route("[controller]")]
 public class ResourcesController : ControllerBase
 {
- 
+
     private static List<Resource> _db = new List<Resource>
     {
         new Resource { Id = 1, Name = "Laptop Dell", Status = "Dostępny" },
@@ -30,7 +30,18 @@ public class ResourcesController : ControllerBase
     {
         resource.Id = _db.Any() ? _db.Max(x => x.Id) + 1 : 1;
         _db.Add(resource);
-       
+
         await _hub.Clients.All.SendAsync("ReceiveUpdate");
+    }
+    [HttpDelete("{id}")]
+    public async Task Delete(int id)
+    {
+        var item = _db.FirstOrDefault(x => x.Id == id);
+        if (item != null)
+        {
+            _db.Remove(item);
+            
+            await _hub.Clients.All.SendAsync("ReceiveUpdate");
+        }
     }
 }
